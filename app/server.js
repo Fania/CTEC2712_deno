@@ -1,6 +1,7 @@
 import { homeController } from "./controllers/home.js";
 import { errorController } from "./controllers/error.js";
 import { staticController } from "./controllers/static.js";
+import { itemsController } from "./controllers/items.js";
 
 export default function server(request) {
   const url = new URL(request.url);
@@ -12,6 +13,10 @@ export default function server(request) {
 
   if(url.pathname == "/") {
     return homeController({ request });
+  }
+
+  if(url.pathname == "/items") {
+    return itemsController({ request });
   }
 
   return errorController({ request });
