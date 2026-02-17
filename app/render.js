@@ -1,6 +1,7 @@
-export default function render(content, status=200) {
+export default function render(viewFn, status=200) {
   const headers = new Headers();
   headers.set("content-type", "text/html");
+  const content = viewFn();
   const doc = `
    <!doctype html>
    <html lang="en">
@@ -17,7 +18,12 @@ export default function render(content, status=200) {
             <a href="/about">About</a>
           </nav>
         </header>
-        ${content}
+        <main>
+          ${content}
+        </main>
+        <footer>
+          <p>&copy; Fania</p>
+        </footer>
       </body>
     </html>
   `;

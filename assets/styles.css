@@ -1,3 +1,46 @@
 body {
-  background: gray;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+  font-family: system-ui;
+
+  header, main, footer {
+    padding-inline: 1rem;
+  }
+
+  header, footer {
+    background: linear-gradient(#13001e, #390267);
+    color: #eee;
+    a {
+      color: inherit;
+    }
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: .5rem;
+
+    h1 {
+      font-weight: 300;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: .5rem;
+
+      a {
+        text-decoration: none;
+        background: hsla(0, 0%, 100%, 0.1);
+        padding: .25rem .5rem;
+      }
+    }
+  }
+
+  footer {
+    text-align: right;
+  }
 }
