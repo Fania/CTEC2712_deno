@@ -1,19 +1,27 @@
-export function server(request) {
-  console.log(request.url);
-  const headers = new Headers();
-  headers.set("content-type", "text/html");
-  const content = `
-   <!Doctype html>
-   <html lang="en">
-      <head>
-        <title>My web application</title>
-        <meta charset="utf-8">
-      </head>
-      <body>
-        <h1>My Web App</h1>
+import { serveDir } from '@std/http';
+import render from './render.js';
+
+export default function server(request) {
+  const url = new URL(request.url);
+  console.log(`\n${request.method} ${url.pathname}${url.search}`);
+
+  if(url.pathname.startsWith("/assets")) {
+    return serveDir(request);
+  }
+
+  if(url.pathname == "/") {
+    return render(`
+      <main>
+        <h2>Welcome Home</h2>
         <p>Hello World</p>
-      </body>
-    </html>
-  `;
-  return new Response(content, { headers });
+      </main>
+    `);
+  }
+
+  return render(`
+    <main>
+      <h2>Not Found</h2>
+      <p>The requested resource does not exist. Sorry!</p>
+    </main>
+  `, 404);
 }
