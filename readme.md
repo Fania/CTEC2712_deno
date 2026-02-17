@@ -24,3 +24,5 @@ Run Deno: `deno task serve`
 
 Add SQLite extension in VSCode.
 Open Command Palette and find `SQLite open DB` command.
+
+Part 5: User input and POST requests
