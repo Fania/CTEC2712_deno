@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "serve": "deno --watch --allow-env --allow-ffi --allow-net=0.0.0.0:8000 --allow-read=./assets main.js",
-    "db:create": "deno --allow-env --allow-ffi ./app/tasks/db-create.js"
+    "serve": "deno --watch --allow-all main.js",
+    "db:create": "deno --allow-all ./app/tasks/db-create.js"
   },
 
   "imports": {
