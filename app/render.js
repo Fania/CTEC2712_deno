@@ -28,6 +28,7 @@ export default function render(viewFn, data, request, status=200) {
           <nav>
             <a href="/">Home</a>
             <a href="/items">Items</a>
+            <a href="/login">Sign in</a>
           </nav>
         </header>
         <main>
