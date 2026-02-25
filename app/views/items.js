@@ -11,7 +11,7 @@ export function itemsView({ items, error }) {
       <h2>List of Items</h2>
       <form method="POST" class="new-item">
         <label for="new-item">New Item: </label>
-        <input id="new-item" name="new-item" required>
+        <input id="new-item" name="new-item" min-length="5" required>
         ${errorMessage}
       </form>
       <ul>

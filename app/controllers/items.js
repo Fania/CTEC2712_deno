@@ -12,8 +12,9 @@ export async function addItemsController({ request }) {
   const formData = await request.formData();
   const newItem = formData.get("new-item");
 
-  if(!newItem) {
-    const error = "New item cannot be blank";
+  if(!newItem || newItem.length < 5) {
+    const error = newItem ? "New item (${newItem}) must have a minimum of 5 chars." 
+                          : "New item cannot be blank";
     const items = getItems();
     return render(itemsView, { items, error }, 400);
   }
