@@ -40,6 +40,15 @@ body {
     }
   }
 
+  form.new-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1rem;
+    p.error {
+      grid-column: span 2;
+    }
+  }
+
   footer {
     text-align: right;
   }

@@ -11,6 +11,13 @@ export function itemsController() {
 export async function addItemsController({ request }) {
   const formData = await request.formData();
   const newItem = formData.get("new-item");
+
+  if(!newItem) {
+    const error = "New item cannot be blank";
+    const items = getItems();
+    return render(itemsView, { items, error }, 400);
+  }
+
   createItem(newItem);
   const headers = new Headers();
   headers.set('location', '/items');

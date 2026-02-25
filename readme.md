@@ -26,3 +26,7 @@ Add SQLite extension in VSCode.
 Open Command Palette and find `SQLite open DB` command.
 
 Part 5: User input and POST requests
+
+Part 6:
+
+Add package/library: `deno add jsr:@std/html`
