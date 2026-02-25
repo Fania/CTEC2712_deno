@@ -30,3 +30,7 @@ Part 5: User input and POST requests
 Part 6: Security concerns
 
 Add package/library: `deno add jsr:@std/html`
+
+Part 7: flash messages
+
+Add package/library: `deno add jsr:@std/encoding`
