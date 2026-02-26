@@ -2,6 +2,8 @@ import { createItem, getItems } from "../models/items.js";
 import render from "../render.js";
 import { itemsView } from "../views/items.js";
 import redirect from "../redirect.js";
+import { validateField, required, minLength, validateSchema } from "../validations.js";
+import { newItemSchema } from "../schema/new-items.js";
 
 export function itemsController({ request }) {
   const items = getItems();
@@ -11,11 +13,12 @@ export function itemsController({ request }) {
 
 export async function addItemsController({ request }) {
   const formData = await request.formData();
-  const newItem = formData.get("new-item");
 
-  if(!newItem || newItem.length < 5) {
-    const error = newItem ? "New item must have a minimum of 5 chars." 
-                          : "New item cannot be blank";
+  validateSchema(formData, newItemSchema);
+
+  const newItem = formData.get("new-item");
+  const error = validateField("New Item", newItem, [required, minLength(3)]);
+  if(error) {
     const items = getItems();
     return render(itemsView, { items, error }, request, 400);
   }
