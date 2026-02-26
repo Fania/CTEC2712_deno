@@ -3,7 +3,7 @@ export function loginFormView() {
         <section aria-labelledby="login-heading" class="center">
             <h2 id="login-heading">Sign in to your account</h2>
             <p>Don't have an account? <a href="/register">Register here!</a></p>
-            <form class="auth">
+            <form method="POST" class="auth">
                 <label for="username">Username: </label>
                 <input id="username" name="username">
                 <label for="password">Password: </label>
@@ -19,7 +19,7 @@ export function registrationFormView() {
         <section aria-labelledby="register-heading" class="center">
             <h2 id="register-heading">Create an account</h2>
             <p>Already have an account? <a href="/login">Login here!</a></p>
-            <form class="auth">
+            <form method="POST" class="auth">
                 <label for="username">Username: </label>
                 <input id="username" name="username">
                 <label for="password">Password: </label>

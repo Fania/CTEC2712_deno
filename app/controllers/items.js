@@ -1,7 +1,7 @@
 import { createItem, getItems } from "../models/items.js";
 import render from "../render.js";
 import { itemsView } from "../views/items.js";
-import { setFlash } from "../flash.js";
+import redirect from "../redirect.js";
 
 export function itemsController({ request }) {
   const items = getItems();
@@ -20,9 +20,7 @@ export async function addItemsController({ request }) {
     return render(itemsView, { items, error }, request, 400);
   }
 
-  const headers = new Headers();
-  headers.set('location', '/items');
   createItem(newItem);
-  setFlash(headers, `added ${newItem} to the list`)
-  return new Response(null, { headers, status: 303 });
+  const headers = new Headers();
+  return redirect(headers, '/items', `added ${newItem} to the list`);
 }

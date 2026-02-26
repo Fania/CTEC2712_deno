@@ -2,7 +2,8 @@ import { homeController } from "./controllers/home.js";
 import { errorController } from "./controllers/error.js";
 import { staticController } from "./controllers/static.js";
 import { itemsController, addItemsController } from "./controllers/items.js";
-import { loginFormController, registrationFormController } from "./controllers/sessions.js";
+import { addSessionController, loginFormController } from "./controllers/sessions.js";
+import { addUserController, registrationFormController } from "./controllers/users.js";
 
 export default function server(request) {
   const url = new URL(request.url);
@@ -32,6 +33,15 @@ export default function server(request) {
   if(url.pathname == "/register" && request.method == 'GET') {
     return registrationFormController({ request });
   }
+
+  if(url.pathname == "/login" && request.method == 'POST') {
+    return addSessionController({ request });
+  }
+
+  if(url.pathname == "/register" && request.method == 'POST') {
+    return addUserController({ request });
+  }
+
 
   return errorController({ request });
 }
