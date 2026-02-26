@@ -40,23 +40,6 @@ body {
     }
   }
 
-  form.new-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0 1rem;
-    place-self: start;
-    padding: 1rem;
-    background: #ddd;
-    border: .5px solid black;
-    p.error {
-      margin-top: 0;
-      grid-column: span 2;
-      color: red;
-      text-align: right;
-      font-size: .9em;
-    }
-  }
-
   button, input {
     font-size: inherit;
   }
@@ -83,21 +66,42 @@ body {
     }
   }
 
-  form.auth {
+  form {
     display: grid;
     grid-template-columns: auto 1fr;
+    p.error {
+      margin-top: 0;
+      grid-column: span 2;
+      color: red;
+      text-align: right;
+      font-size: .9em;
+    }
+    label {
+      text-align: right;
+    }
+  }
+
+  form.auth {
     gap: .5rem;
     place-self: center;
     background: linear-gradient(#222, #555);
     color: #eee;
     padding: 2rem;
-    label {
-      text-align: right;
-    }
     button {
       grid-column: 2;
       place-self: end;
     }
+    p.error {
+      color: pink;
+    }
+  }
+
+  form.new-item {
+    gap: 0 1rem;
+    place-self: start;
+    padding: 1rem;
+    background: #ddd;
+    border: .5px solid black;
   }
 
   footer {
