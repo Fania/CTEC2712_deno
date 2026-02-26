@@ -1,5 +1,8 @@
 import { required, minLength } from "../validations.js";
 
 export const newItemSchema = {
-    "new-item": [required, minLength(3)]
+    "new-item": {
+        validators: [required, minLength(3)],
+        displayName: "New item"
+    }
 }

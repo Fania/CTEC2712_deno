@@ -36,3 +36,5 @@ Part 7: flash messages
 Add package/library: `deno add jsr:@std/encoding`
 
 Part 8: Authentication UI
+
+Part 9: Form validation
