@@ -1,14 +1,4 @@
-import { escape } from "@std/html/entities";
-
-function fragments (errors) {
-    return Object.fromEntries(Object.keys(errors).map(key => {
-        const { error, value, message } = errors[key] || '';
-        return [key, {
-            value: value ? `value="${escape(value)}"` : '',
-            message: error ? `<p class="error">${escape(message)}</p>` : ''
-        }];
-    }));
-}
+import { fragments } from './errors.js';
 
 export function loginFormView({ errors = { username: {}, password: {} }}) {
     const { username, password } = fragments(errors);

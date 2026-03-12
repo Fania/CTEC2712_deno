@@ -18,7 +18,7 @@ export async function addItemsController({ request }) {
   if(!isValid) {
     const items = getItems();
     console.log(error);
-    return render(itemsView, { items, error }, request, 400);
+    return render(itemsView, { items, errors }, request, 400);
   }
   createItem(newItem);
   const headers = new Headers();
