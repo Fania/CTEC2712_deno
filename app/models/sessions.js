@@ -8,3 +8,13 @@ export function createSession(username) {
     `).run({ sessionId, username });
     return sessionId;
 }
+
+export function getSession(sessionId) {
+    return db.prepare(`
+        SELECT * FROM sessions WHERE id=:sessionId
+    `).run({ sessionId });
+}
+
+export function deleteSession(sessionId) {
+    db.prepare("DELETE FROM sessions WHERE id=:sessionId").run({ sessionId });
+}

@@ -25,5 +25,4 @@ db.exec(`
     ('apples'),
     ('bananas'),
     ('cherries');
-
 `);

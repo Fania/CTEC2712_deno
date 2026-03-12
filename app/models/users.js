@@ -18,6 +18,18 @@ export async function createUser({ username, password }) {
     `).run({ username, hashedPassword });
 }
 
+function getUser(username) {
+    return db.prepare("SELECT * FROM users WHERE username=:username").run({ username });
+}
+
+export async function checkCredentials({ username, password }) {
+    const user = getUser(username);
+    if (!user) return false;
+    const hashed = await hashPassword(password);
+    return user.hashedPassword == hashed;
+}
+
+
 async function hashPassword(password) {
     const inputBytes = new TextEncoder().encode(password);
     const key = await crypto.subtle.importKey('raw', inputBytes, 'PBKDF2', false, ['deriveBits']);

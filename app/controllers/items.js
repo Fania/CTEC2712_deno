@@ -4,8 +4,14 @@ import { itemsView } from "../views/items.js";
 import redirect from "../redirect.js";
 import { validateSchema } from "../validations.js";
 import { newItemSchema } from "../schema/new-items.js";
+import { currentSession } from "../auth.js";
 
 export function itemsController({ request }) {
+  const session = currentSession(request.headers);
+  if(!session) {
+    const headers = new Headers();
+    return redirect(headers, "/login", "Sign in to gain access.");
+  }
   const items = getItems();
   return render(itemsView, { items }, request);
 }

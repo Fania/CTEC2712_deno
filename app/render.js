@@ -1,6 +1,5 @@
 import { escape } from "@std/html/entities";
 import { getFlash } from "./flash.js";
-import { getFlash } from "./flash.js";
 import { currentSession } from "./auth.js";
 
 export default function render(viewFn, data, request, status=200) {
@@ -12,9 +11,9 @@ export default function render(viewFn, data, request, status=200) {
                         '';
 
   const links = `${session ? 
-                  `<a href="/items">items</a>
-                  <form method="POST" action="/logout"><button>sign out</button></form>`
-                  : `<a href="/login">sign in</a>`
+                  `<a href="/items">Items</a>
+                  <form method="POST" action="/logout"><button>Logout</button></form>`
+                  : `<a href="/login">Login</a>`
   }`;
 
   headers.set("content-type", "text/html");
@@ -35,15 +34,13 @@ export default function render(viewFn, data, request, status=200) {
         <title>My web application</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/assets/styles.css">
-        <script type="module" url="/assets/js/confirmPassword.js"></script>
       </head>
       <body>
         <header>
           <h1>My Web App</h1>
           <nav>
             <a href="/">Home</a>
-            <a href="/items">Items</a>
-            <a href="/login">Sign in</a>
+            ${links}
           </nav>
         </header>
         <main>
@@ -51,6 +48,7 @@ export default function render(viewFn, data, request, status=200) {
           ${content}
         </main>
         <footer>
+          <p>${footerMessage}</p>
           <p>&copy; Fania</p>
         </footer>
       </body>

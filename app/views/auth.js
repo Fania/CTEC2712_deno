@@ -37,6 +37,7 @@ export function registrationFormView({ errors = { username: {}, password: {}, co
                 ${confirm.message}  
                 <button>Sign up</button>
             </form>
+            <script type="module" src="/assets/js/confirmPassword.js"></script>
         </section>
     `;
 }
