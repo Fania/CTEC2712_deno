@@ -40,3 +40,5 @@ Part 8: Authentication UI
 Part 9: Form validation
 
 Part 10: Integrating errors
+
+Part 11: Authentication

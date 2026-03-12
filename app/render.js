@@ -21,6 +21,7 @@ export default function render(viewFn, data, request, status=200) {
         <title>My web application</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/assets/styles.css">
+        <script type="module" url="/assets/js/confirmPassword.js"></script>
       </head>
       <body>
         <header>
