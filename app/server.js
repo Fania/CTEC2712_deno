@@ -5,8 +5,15 @@ import { itemsController, addItemsController } from "./controllers/items.js";
 import { addSessionController, loginFormController, deleteSessionController } from "./controllers/sessions.js";
 import { addUserController, registrationFormController } from "./controllers/users.js";
 import ApplicationRouter from "./router.js";
+import { withLogs } from "./middleware/logging.js";
+import { withSession } from "./middleware/auth.js";
+import { withHeaders } from "./middleware/headers.js";
 
 const app = new ApplicationRouter();
+
+app.use(withLogs);
+app.use(withHeaders);
+app.use(withSession);
 
 app.get('/assets/*', staticController);
 app.get('/', homeController);
@@ -21,8 +28,5 @@ app.get('*', errorController);
 app.post('*', errorController);
 
 export default function server(request) {
-  const url = new URL(request.url);
-  console.log(`\n${request.method} ${url.pathname}${url.search}`);
-  console.log(`\n${url.searchParams.get("new-item")}`);
   return app.handle({request});
 }

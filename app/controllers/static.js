@@ -1,6 +1,6 @@
 import { serveDir } from "@std/http";
-import render from "../render.js";
 
-export function staticController({ request }) {
+export function staticController(ctx) {
+  const {request} = ctx;
   return serveDir(request);
 }

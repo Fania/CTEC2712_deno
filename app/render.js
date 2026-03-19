@@ -1,11 +1,8 @@
 import { escape } from "@std/html/entities";
 import { getFlash } from "./flash.js";
-import { currentSession } from "./auth.js";
 
-export default function render(viewFn, data, request, status=200) {
-  const headers = new Headers();
-
-  const session = currentSession(request.headers);
+export default function render(viewFn, data, ctx, status=200) {
+  const {request, session, headers} = ctx;
   const footerMessage = session ?
                         `logged in as '${session.username}'` :
                         '';

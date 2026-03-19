@@ -46,3 +46,5 @@ Part 11: Authentication
 Part 12: Using the session
 
 Part 13: Application router
+
+Part 14: Global middleware

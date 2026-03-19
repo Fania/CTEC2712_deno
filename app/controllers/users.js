@@ -6,22 +6,19 @@ import { userSchema } from "../schema/user.js";
 import { registrationFormView } from "../views/auth.js";
 import { validateSchema } from "../validations.js";
 
-export function registrationFormController({ request }) {
-    return render(registrationFormView, {}, request);
+export function registrationFormController(ctx) {
+    return render(registrationFormView, {}, ctx);
 }
 
-export async function addUserController({ request }) {
+export async function addUserController(ctx) {
+    const {request, headers} = ctx;
     const formData = await request.formData();
     const { isValid, errors, validated } = validateSchema(formData, userSchema);
     if(!isValid) {
-        return render(registrationFormView, { errors }, request, 400);
+        return render(registrationFormView, { errors }, ctx, 400);
     }
-
     await createUser(validated);
-
-    const headers = new Headers();
     login(headers, validated.username);
-
     return redirect(headers, "/", `user ${validated.username} created`);
     
 }

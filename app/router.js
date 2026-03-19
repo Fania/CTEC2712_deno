@@ -1,6 +1,7 @@
 export default class ApplicationRouter {
     constructor() {
         this.routes = [];
+        this.middleware = [];
     }
     register(method, pattern, handler) {
         if(typeof pattern == "string") {
@@ -14,10 +15,21 @@ export default class ApplicationRouter {
     post(...args) {
         this.register('POST', ...args);
     }
-    handle({request}) {
+    use(middlewareFunction) {
+        this.middleware.push(middlewareFunction);
+    }
+    chain(ctx, middleware, handler) {
+        if(middleware.length == 0) return handler(ctx);
+        const [nextMWFunction, ...remainingMWFunctions] = middleware;
+        const next = (ctx) => { return this.chain(ctx, remainingMWFunctions, handler) }
+        return nextMWFunction({...ctx}, next);
+    }
+    handle(ctx) {
+        const {request} = ctx;
         const route = this.routes.find(({method, pattern}) => {
             return request.method == method && pattern.test(request.url);
         });
-        return route.handler({request});
+        return this.chain(ctx, this.middleware, route.handler);
+        // return route.handler({request});
     }
 }
