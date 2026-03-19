@@ -1,27 +1,24 @@
 import render from "../render.js";
 import redirect from "../redirect.js";
 import { loginFormView } from "../views/auth.js";
-import { validateSchema } from "../validations.js";
-import { userSchema } from "../schema/user.js";
 import { checkCredentials } from "../models/users.js";
 import { login, logout } from "../auth.js";
 
 export function loginFormController(ctx) {
-    return render(loginFormView, {}, ctx);
+    const {errors} = ctx;
+    return render(loginFormView, {errors}, ctx);
 }
 
-export async function addSessionController(ctx) {
-    const {request, headers} = ctx;
-    const formData = await request.formData();
-    const { isValid, errors, validated} = validateSchema(formData, userSchema);
-    console.log('adding session', isValid, errors, validated);
-    if(!isValid) {
-        return render(loginFormView, {errors}, ctx, 400);
-    }
+export async function addSessionController(ctx, next) {
+    const {isValid, validated, headers} = ctx;
+    console.log('adding session', isValid, validated);
+    if(!isValid) return next(ctx);
     const validCredentials = await checkCredentials(validated);
     if(!validCredentials) {
+        console.log(validated.username);
         return redirect(headers, "/login", `invalid credentials`);
     }
+    console.log(validated.username);
     login(headers, validated.username);
     return redirect(headers, "/", `logged in as ${validated.username}`);
 }

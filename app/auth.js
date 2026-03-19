@@ -8,6 +8,7 @@ export function login(headers, username) {
         value: sessionId,
         path: '/'
     });
+    console.log('Session created');
 }
 
 export function currentSession(requestHeaders) {

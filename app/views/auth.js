@@ -19,8 +19,8 @@ export function loginFormView({ errors = { username: {}, password: {} }}) {
     `;
 }
 
-export function registrationFormView({ errors = { username: {}, password: {}, confirm: {} }}) {
-    const { username, password, confirm } = fragments(errors);
+export function registrationFormView({ errors = { username: {}, password: {} }}) {
+    const { username, password } = fragments(errors);
     return `
         <section aria-labelledby="register-heading" class="center">
             <h2 id="register-heading">Create an account</h2>
@@ -33,8 +33,7 @@ export function registrationFormView({ errors = { username: {}, password: {}, co
                 <input id="password" name="password" type="password" ${password.value} required>
                 ${password.message}                
                 <label for="confirm">Confirm password: </label>
-                <input id="confirm" name="confirm" type="password" ${confirm.value} required>
-                ${confirm.message}  
+                <input id="confirm" name="confirm" type="password" required> 
                 <button>Sign up</button>
             </form>
             <script type="module" src="/assets/js/confirmPassword.js"></script>

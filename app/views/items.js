@@ -2,7 +2,6 @@ import { escape } from "@std/html/entities";
 import { fragments } from "./errors.js";
 
 export function itemsView({ items, errors = {"new-item": {}}}) {
-
   const newItem = fragments(errors)["new-item"];
   const listItems = items.map(item => `<li>${escape(item.label)}</li>`).join("\n");
 

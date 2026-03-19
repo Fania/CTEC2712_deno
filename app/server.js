@@ -6,8 +6,11 @@ import { addSessionController, loginFormController, deleteSessionController } fr
 import { addUserController, registrationFormController } from "./controllers/users.js";
 import ApplicationRouter from "./router.js";
 import { withLogs } from "./middleware/logging.js";
-import { withSession } from "./middleware/auth.js";
+import { excludesSession, requiresSession, withSession } from "./middleware/auth.js";
 import { withHeaders } from "./middleware/headers.js";
+import { validate } from "./middleware/validate.js";
+import { newItemSchema } from "./schema/new-items.js";
+import { userSchema } from "./schema/user.js";
 
 const app = new ApplicationRouter();
 
@@ -17,13 +20,13 @@ app.use(withSession);
 
 app.get('/assets/*', staticController);
 app.get('/', homeController);
-app.get('/items', itemsController);
-app.post('/items', addItemsController);
-app.get('/login', loginFormController);
-app.post('/login', addSessionController);
-app.get('/register', registrationFormController);
-app.post('/register', addUserController);
-app.post('/logout', deleteSessionController);
+app.get('/items', itemsController, requiresSession);
+app.post('/items', itemsController, requiresSession, validate(newItemSchema), addItemsController);
+app.get('/login', loginFormController, excludesSession);
+app.post('/login', loginFormController, excludesSession, validate(userSchema), addSessionController);
+app.get('/register', registrationFormController, excludesSession);
+app.post('/register', registrationFormController, excludesSession, validate(userSchema), addUserController);
+app.post('/logout', deleteSessionController, requiresSession);
 app.get('*', errorController);
 app.post('*', errorController);
 

@@ -13,6 +13,6 @@ export function getFlash(requestHeaders, responseHeaders) {
     const { flash } = getCookies(requestHeaders);
     if(flash) {
         deleteCookie(responseHeaders, "flash", { path: "/" });
-        console.log("remember to delete the flash cookie once it's been used");
+        // console.log("remember to delete the flash cookie once it's been used");
     }   return new TextDecoder().decode(decodeBase64Url(flash));
 }
